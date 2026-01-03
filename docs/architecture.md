@@ -79,7 +79,7 @@ graph TB
 
 ### 2. バックエンド API
 
-- **技術スタック**: Node.js / Python (FastAPI)
+- **技術スタック**: Node.js
 - **ホスティング**: AWS Lambda + API Gateway（商用利用可）
   - AWS Lambda: 無料枠 100 万リクエスト/月
   - API Gateway: 無料枠 100 万リクエスト/月（最初の 12 ヶ月）

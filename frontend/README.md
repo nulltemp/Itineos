@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Itineos Frontend
 
-## Getting Started
+Itineos サービスのフロントエンドアプリケーションです。Next.js (React) + TypeScript で構築されています。
 
-First, run the development server:
+## 機能
+
+- 観光ルート生成フォーム
+- 現在地の取得
+- ルート結果の表示（移動時間、距離、詳細な経路）
+- 天気情報の表示
+- AIによるスポット推薦
+
+## セットアップ
+
+### 1. 依存関係のインストール
+
+```bash
+npm install
+```
+
+### 2. 環境変数の設定
+
+`.env.local` ファイルを作成し、以下の環境変数を設定してください：
+
+```env
+NEXT_PUBLIC_API_BASE_URL=https://your-api-gateway-url.execute-api.region.amazonaws.com/prod
+```
+
+### 3. 開発サーバーの起動
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いて確認できます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ビルド
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+静的エクスポートとしてビルドします（Cloudflare Pages用）：
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+ビルド結果は `out/` ディレクトリに出力されます。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## デプロイ
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Cloudflare Pages
 
-## Deploy on Vercel
+1. GitHubリポジトリにプッシュ
+2. Cloudflare Pagesでプロジェクトを接続
+3. ビルドコマンド: `npm run build`
+4. 出力ディレクトリ: `out`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### その他のホスティング
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+静的ファイル（`out/`ディレクトリ）を任意の静的ホスティングサービスにデプロイできます。
+
+## プロジェクト構成
+
+```
+frontend/
+├── app/              # Next.js App Router
+│   ├── layout.tsx    # ルートレイアウト
+│   ├── page.tsx       # メインページ
+│   └── globals.css   # グローバルスタイル
+├── src/
+│   ├── components/   # Reactコンポーネント
+│   │   ├── RouteForm.tsx
+│   │   └── RouteResult.tsx
+│   ├── lib/          # ユーティリティ
+│   │   └── api.ts    # API呼び出し
+│   └── types/        # TypeScript型定義
+│       └── index.ts
+└── public/           # 静的ファイル
+```
+
+## 技術スタック
+
+- **Next.js 16**: Reactフレームワーク
+- **TypeScript**: 型安全性
+- **Tailwind CSS**: スタイリング
+- **React 19**: UIライブラリ
