@@ -127,14 +127,12 @@ graph TB
 - **コスト**: リクエストベース課金
 - **最適化**: キャッシュで重複リクエスト削減
 
-#### OpenWeatherMap API
+#### Google Maps Weather API
 
-- **用途**: 天気予報データ取得
-- **コスト**: 無料枠 1,000 コール/日（商用利用可）
-  - Free プラン: 1 分間隔での天気データ取得可能
-  - 有料プラン: $40/月から（100 万コール/月）
-- **最適化**: キャッシュで頻繁な呼び出しを防止
-- **代替案**: WeatherAPI.com（無料枠 100 万コール/月、商用利用可）
+- **用途**: 天気予報データ取得（Google Maps Platform の Weather 機能を利用）
+- **コスト**: Google Maps Platform の課金体系に依存（リクエストベース）
+  - **最適化**: キャッシュで頻繁な呼び出しを防止
+  - **代替案**: OpenWeatherMap、WeatherAPI.com など
 
 #### Gemini API (Google AI Studio)
 
@@ -152,7 +150,7 @@ sequenceDiagram
     participant Cache as Redis Cache
     participant Backend as バックエンド
     participant Maps as Google Maps
-    participant Weather as OpenWeatherMap
+    participant Weather as Google Maps Weather
     participant AI as Gemini API
     participant DB as データベース
 
@@ -201,7 +199,7 @@ sequenceDiagram
 - **AWS API Gateway**: 無料枠 100 万リクエスト/月（最初の 12 ヶ月）
 - **Supabase/Neon**: データベース無料枠（商用利用可）
 - **Cloudflare R2**: オブジェクトストレージ無料枠（商用利用可）
-- **OpenWeatherMap API**: 無料枠 1,000 コール/日（商用利用可）
+  - **Google Maps Weather API**: Google Maps Platform の料金に従う（リクエストベース）
 
 ### 4. API 呼び出し最適化
 

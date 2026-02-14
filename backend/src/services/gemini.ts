@@ -1,18 +1,16 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import { RecommendedSpot, Location } from '../types';
 
 const API_KEY = process.env.GEMINI_API_KEY || '';
 
 export class GeminiService {
-  private genAI: GoogleGenerativeAI;
-  private model: any;
+  private genAI: GoogleGenAI;
 
   constructor() {
     if (!API_KEY) {
       throw new Error('GEMINI_API_KEY environment variable is not set');
     }
-    this.genAI = new GoogleGenerativeAI(API_KEY);
-    this.model = this.genAI.getGenerativeModel({ model: 'gemini-pro' });
+    this.genAI = new GoogleGenAI({ apiKey: API_KEY });
   }
 
   /**
@@ -26,9 +24,11 @@ export class GeminiService {
     try {
       const prompt = this.buildRecommendationPrompt(mood, locations, currentLocation);
       
-      const result = await this.model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
+      const response = await this.genAI.models.generateContent({
+        model: 'gemini-pro',
+        contents: prompt,
+      });
+      const text = response.text || '';
 
       // JSON形式で返されることを期待
       return this.parseRecommendations(text, locations);
@@ -61,9 +61,11 @@ Respond ONLY with a valid JSON object in this format:
 
 If no specific locations are mentioned, return an empty array for locations.`;
 
-      const result = await this.model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
+      const response = await this.genAI.models.generateContent({
+        model: 'gemini-pro',
+        contents: prompt,
+      });
+      const text = response.text || '';
 
       // JSONを抽出
       const jsonMatch = text.match(/\{[\s\S]*\}/);

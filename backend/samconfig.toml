@@ -1,0 +1,13 @@
+version = 0.1
+
+[default]
+[default.global.parameters]
+stack_name = "itineos-backend-local"
+
+[default.local_start_api.parameters]
+warm_containers = "EAGER"
+debug_port = 5858
+debug_args = "--inspect"
+container_env_var_file = "env.json"
+port = 3001
+

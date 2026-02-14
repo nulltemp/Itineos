@@ -9,8 +9,8 @@ export const handler = async (
   const headers = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': '*',
+    'Access-Control-Allow-Methods': '*',
   };
 
   // OPTIONS リクエストの処理（CORS プリフライト）
@@ -18,7 +18,7 @@ export const handler = async (
     return {
       statusCode: 200,
       headers,
-      body: '',
+      body: '{}',
     };
   }
 

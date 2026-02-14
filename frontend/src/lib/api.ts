@@ -1,6 +1,7 @@
 import { RouteRequest, RouteResponse } from '@/types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://your-api-gateway-url.execute-api.region.amazonaws.com/prod';
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://your-api-gateway-url.execute-api.region.amazonaws.com/prod';
+const API_BASE_URL = 'http://127.0.0.1:3001';
 
 export async function generateRoute(request: RouteRequest): Promise<RouteResponse> {
   const response = await fetch(`${API_BASE_URL}/api/route`, {

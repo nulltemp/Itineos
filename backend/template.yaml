@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Itineos Backend Lambda Function
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 512
+    Runtime: nodejs20.x
+    Environment:
+      Variables:
+        NODE_ENV: development
+
+Resources:
+  RouteFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: dist/
+      Handler: index.handler
+      Events:
+        RouteApi:
+          Type: Api
+          Properties:
+            Path: /api/route
+            Method: post
+            Cors:
+              AllowMethods: "'POST,OPTIONS'"
+              AllowHeaders: "'Content-Type'"
+              AllowOrigin: "'*'"
+        RouteApiOptions:
+          Type: Api
+          Properties:
+            Path: /api/route
+            Method: options
+            Cors:
+              AllowMethods: "'POST,OPTIONS'"
+              AllowHeaders: "'Content-Type'"
+              AllowOrigin: "'*'"
+      Environment:
+        Variables:
+          GEMINI_API_KEY: !Ref GeminiApiKey
+          GOOGLE_MAPS_API_KEY: !Ref GoogleMapsApiKey
+
+Parameters:
+  GeminiApiKey:
+    Type: String
+    Description: Gemini API Key
+    Default: ""
+  GoogleMapsApiKey:
+    Type: String
+    Description: Google Maps API Key
+    Default: ""
+
+Outputs:
+  RouteApi:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/route"
+  RouteFunction:
+    Description: "Route Lambda Function ARN"
+    Value: !GetAtt RouteFunction.Arn
