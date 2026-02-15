@@ -7,7 +7,7 @@
     "build": "tsc",
     "preload-env": "node scripts/load-env.js",
     "sam:build": "npm run build && sam build",
-    "sam:start": "npm run preload-env && sam local start-api --port 3001",
+    "sam:start": "npm run preload-env && sam local start-api --port 3001 --env-vars env.json",
     "sam:start:debug": "npm run preload-env && sam local start-api --port 3001 --debug-port 5858",
     "sam:invoke": "npm run preload-env && sam local invoke RouteFunction",
     "test": "echo \"Error: no test specified\" && exit 1"

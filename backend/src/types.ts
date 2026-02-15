@@ -8,7 +8,7 @@ export interface RouteRequest {
     lng: number;
   };
   preferences?: {
-    transportation?: 'walking' | 'transit' | 'driving' | 'mixed';
+    transportation?: 'walking' | 'transit' | 'driving';
     avoidTolls?: boolean;
     avoidHighways?: boolean;
   };

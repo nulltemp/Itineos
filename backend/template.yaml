@@ -15,8 +15,8 @@ Resources:
   RouteFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: dist/
-      Handler: index.handler
+      CodeUri: ./
+      Handler: dist/index.handler
       Events:
         RouteApi:
           Type: Api
